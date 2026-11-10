@@ -32,8 +32,15 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
-html, body { overflow-x: clip; }
+html { scroll-padding-top: 72px; -webkit-text-size-adjust: 100%; }
+/* Smooth anchor scrolling only with a mouse or trackpad. On phones it interferes with the
+   browser's own handling of its collapsing toolbar, which can leave the top of the page hidden. */
+@media (hover: hover) and (pointer: fine) {
+  html { scroll-behavior: smooth; }
+}
+/* Sideways overflow is clipped on the content, not on the page itself, so the
+   page scrolls exactly as the browser expects. */
+main { overflow-x: clip; }
 
 body {
   margin: 0;
@@ -495,7 +502,7 @@ p { text-wrap: pretty; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  html { scroll-behavior: auto !important; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
   .code-track { animation: none !important; }
   .js [data-reveal], .js .tl .tl__card, .js .tl .tl__year { opacity: 1; transform: none; transition: none; }

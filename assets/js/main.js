@@ -31,6 +31,30 @@
   });
 
   /* ------------------------------------------------------------------
+     Temporary: add ?debug to the address to show scroll measurements,
+     for tracking down a phone-only layout problem. Remove once solved.
+     ------------------------------------------------------------------ */
+  if (new URLSearchParams(location.search).has('debug')) {
+    const box = document.createElement('pre');
+    box.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:999;margin:0;padding:8px 10px;background:rgba(0,0,0,.85);color:#fff;font:11px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;pointer-events:none';
+    document.body.append(box);
+    const top = (sel) => { const el = document.querySelector(sel); return el ? Math.round(el.getBoundingClientRect().top) : 'none'; };
+    const show = () => {
+      const vv = window.visualViewport, de = document.documentElement, hero = document.getElementById('banner');
+      box.textContent =
+        `scrollY ${Math.round(window.scrollY)}  docEl.scrollTop ${Math.round(de.scrollTop)}  body.scrollTop ${Math.round(document.body.scrollTop)}\n` +
+        `innerH ${window.innerHeight}  clientH ${de.clientHeight}  docH ${de.scrollHeight}\n` +
+        `vv offsetTop ${vv ? Math.round(vv.offsetTop) : '-'}  pageTop ${vv ? Math.round(vv.pageTop) : '-'}  height ${vv ? Math.round(vv.height) : '-'}  scale ${vv ? vv.scale.toFixed(2) : '-'}\n` +
+        `nav.top ${top('.nav')}  hero.top ${top('#banner')}  photo.top ${top('.hero__photo')}  hero.scrollTop ${hero ? Math.round(hero.scrollTop) : '-'}`;
+    };
+    show();
+    window.addEventListener('scroll', show, { passive: true });
+    window.addEventListener('resize', show);
+    if (window.visualViewport) { window.visualViewport.addEventListener('scroll', show); window.visualViewport.addEventListener('resize', show); }
+    setInterval(show, 500);
+  }
+
+  /* ------------------------------------------------------------------
      Reveal on scroll
      ------------------------------------------------------------------ */
   const revealObserver = new IntersectionObserver((entries) => {
