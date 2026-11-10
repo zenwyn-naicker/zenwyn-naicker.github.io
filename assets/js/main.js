@@ -31,22 +31,6 @@
   });
 
   /* ------------------------------------------------------------------
-     Chrome on iPhone: add the extra space above the photo only once the
-     page has been scrolled, which is when that browser shifts the page up.
-     Until then the top section keeps its normal spacing.
-     ------------------------------------------------------------------ */
-  const root = document.documentElement;
-  if (root.classList.contains('crios')) {
-    const markShifted = () => {
-      if (window.scrollY <= 0) return;
-      root.classList.add('shifted');
-      window.removeEventListener('scroll', markShifted);
-    };
-    window.addEventListener('scroll', markShifted, { passive: true });
-    markShifted();
-  }
-
-  /* ------------------------------------------------------------------
      Reveal on scroll
      ------------------------------------------------------------------ */
   const revealObserver = new IntersectionObserver((entries) => {
