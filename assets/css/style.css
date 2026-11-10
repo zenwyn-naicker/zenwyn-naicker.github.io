@@ -482,13 +482,17 @@ p { text-wrap: pretty; }
   .hero .actions .btn--primary { margin-right: 6px; }
   .contact__inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .contact__email a { font-size: min(24px, 6.2vw); }
-  .hero { min-height: 0; padding: 92px 0 56px; }
+  .hero { min-height: 0; padding: 28px 0 56px; }
   .hero__inner { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .hero__photo { order: -1; justify-self: start; width: 132px; aspect-ratio: 1; border-radius: 50%; }
   .hero__about { font-size: 16px; }
   /* Code runs behind the photo at the top, then fades out before the name and paragraph. */
-  .banner__code { font-size: 12.5px; line-height: 28px; justify-content: flex-start; padding-top: 60px; }
-  .banner__shade { background: linear-gradient(180deg, rgba(246, 246, 245, 0.2) 0, rgba(246, 246, 245, 0.2) 185px, rgba(246, 246, 245, 1) 245px); }
+  .banner__code { font-size: 12.5px; line-height: 28px; justify-content: flex-start; padding-top: 4px; }
+  .banner__shade { background: linear-gradient(180deg, rgba(246, 246, 245, 0.2) 0, rgba(246, 246, 245, 0.2) 120px, rgba(246, 246, 245, 1) 182px); }
+  /* On phones the navigation is part of the page and scrolls away with it. A bar pinned over
+     the page can end up covering the top of it when the browser's own toolbar slides back in. */
+  html { scroll-padding-top: 0; }
+  .nav { position: static; background: var(--bg-soft); -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom: 0; }
   .nav__links { gap: 14px; }
   .nav__links a { font-size: 13.5px; }
 
