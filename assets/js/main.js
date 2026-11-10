@@ -12,6 +12,25 @@
   window.addEventListener('scroll', onScrollNav, { passive: true });
 
   /* ------------------------------------------------------------------
+     Back to top
+     On phones the browser's toolbar slides back in while the page scrolls up.
+     A smooth scroll to the "#banner" anchor can then stop short, leaving the
+     top of the page under the toolbar. Jump straight to the top on touch
+     devices, and keep "#banner" out of the address bar so a reload starts
+     at the real top.
+     ------------------------------------------------------------------ */
+  const cleanUrl = () => history.replaceState(null, '', location.pathname + location.search);
+  if (location.hash === '#banner') cleanUrl();
+  document.querySelectorAll('a[href="#banner"]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const instant = reduceMotion || window.matchMedia('(pointer: coarse)').matches;
+      window.scrollTo({ top: 0, behavior: instant ? 'instant' : 'smooth' });
+      cleanUrl();
+    });
+  });
+
+  /* ------------------------------------------------------------------
      Reveal on scroll
      ------------------------------------------------------------------ */
   const revealObserver = new IntersectionObserver((entries) => {
