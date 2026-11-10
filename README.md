@@ -15,6 +15,8 @@ A single static page hosted on GitHub Pages, with no build step or dependencies.
 | `assets/projects/` | Phone screenshots for the two animated mobile demos |
 | `assets/img/` | Profile photo and link preview image |
 | `assets/docs/` | CV |
+| `assets/fonts/` | Inter and JetBrains Mono (SIL Open Font License), served locally |
+| `404.html`, `robots.txt`, `sitemap.xml` | Not-found page and search engine files |
 
 Most project demos are short muted video loops cut from the full demo videos. The two small phone demos are configured in the `DEMOS` object in `main.js`: a list of screenshots with optional tap targets, scrolling and transitions.
 
