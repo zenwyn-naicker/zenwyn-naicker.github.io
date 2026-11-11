@@ -495,11 +495,6 @@ p { text-wrap: pretty; }
   /* Code runs behind the photo at the top, then fades out before the name and paragraph. */
   .banner__code { font-size: 12.5px; line-height: 28px; justify-content: flex-start; padding-top: 60px; }
   .banner__shade { background: linear-gradient(180deg, rgba(246, 246, 245, 0.2) 0, rgba(246, 246, 245, 0.2) 185px, rgba(246, 246, 245, 1) 245px); }
-  /* Chrome on iPhone can leave the page sitting about one toolbar-height too high after its
-     address bar slides back in, which pushed the photo under the navigation bar. The extra
-     space keeps the photo clear in that state. Set from a class added in index.html. */
-  .crios .hero { padding-top: 212px; }
-  .crios .banner__shade { background: linear-gradient(180deg, rgba(246, 246, 245, 0.2) 0, rgba(246, 246, 245, 0.2) 305px, rgba(246, 246, 245, 1) 365px); }
   .nav__links { gap: 14px; }
   .nav__links a { font-size: 13.5px; }
 
